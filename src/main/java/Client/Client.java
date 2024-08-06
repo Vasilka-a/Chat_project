@@ -25,7 +25,7 @@ public class Client {
     }
 
     public static String getUserName(BufferedReader stdIn) throws IOException {
-        System.out.println("Напишите свое имя, для входа в чат: ");
+        System.out.println("Напишите свое имя для входа в чат: ");
         return stdIn.readLine();
     }
 
