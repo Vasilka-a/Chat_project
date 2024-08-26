@@ -9,10 +9,10 @@ import java.net.Socket;
 
 public class WriteMsg extends Thread {
     public static Logger logger = new Logger();
-    private PrintWriter out;
-    private BufferedReader stdIn;
-    private String userName;
-    private Socket socket;
+    private final PrintWriter out;
+    private final BufferedReader stdIn;
+    private final String userName;
+    private final Socket socket;
 
     public WriteMsg(PrintWriter out, BufferedReader stdIn, String userName, Socket socket) {
         this.out = out;
@@ -35,6 +35,7 @@ public class WriteMsg extends Thread {
                 }
                 out.println("[" + userName + "]  " + clientInput);
                 logger.logMsg(clientInput, userName);
+
             } catch (IOException e) {
                 try {
                     stopService();

@@ -7,9 +7,9 @@ import java.net.Socket;
 
 public class ClientThread extends Thread {
     public static Logger logger = new Logger();
-    private static BufferedReader in;
-    private Socket socket;
-    private PrintWriter out;
+    private final BufferedReader in;
+    private final Socket socket;
+    private final PrintWriter out;
 
     public ClientThread(Socket socket) throws IOException {
         this.socket = socket;
@@ -17,7 +17,7 @@ public class ClientThread extends Thread {
         out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
     }
 
-    public synchronized void run() {
+    public void run() {
         try {
             String name = in.readLine();
             if (name.equals("exit")) {
@@ -32,7 +32,7 @@ public class ClientThread extends Thread {
             while (true) {
                 String incoming = in.readLine();
                 if (incoming.equals("exit")) {
-                    sendMsg("Пользователь " + name + " вышел из чата");
+                    sendMsgALL("Пользователь " + name + " вышел из чата", this);
                     out.write(incoming);
                     this.close();
                     break;
